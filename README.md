@@ -1,5 +1,5 @@
 In order to use the emulator [gnuboy](https://github.com/Eternln00b/gnuboy), you need to install the module [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](SDL2_rev).
-To install the modules, you have to place them inside a subdirectory of hakchi2 called "user_mods". Most of the time, the root directory "hakchi2" is inside "Documents."
+To install the modules, you have to place them inside a subdirectory of Hakchi2 called "user_mods". Most of the time, the root directory of Hakchi2 is inside "Documents."
 
 ![Screenshot](./.pictures/pathway.png)
 
@@ -7,7 +7,7 @@ To install the modules, you have to place them inside a subdirectory of hakchi2 
 
 ![Screenshot](./.pictures/hmod.png)
 
-Once the modules are installed with [hakchi2](https://github.com/teamshinkansen/hakchi2-ce/releases) you juste have to use the wrapper script "/usr/games/gnuboy-cmd". 
+Once the modules are installed with [Hakchi2](https://github.com/teamshinkansen/hakchi2-ce/releases) you juste have to use the wrapper script "/usr/games/gnuboy-cmd". 
 It doesn't require argument. 
 
 ![Screenshot](./.pictures/cmdline1.png)
