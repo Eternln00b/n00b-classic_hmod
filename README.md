@@ -18,6 +18,8 @@ This version has been compiled with my SDK with my version of [SDL2 (2.0.14)](ht
 The emulator runs pretty well and the Nintendo gamepads are directly recognized.
 The 8bitdo bluetooth gamepads should work too. I tested it with the [8BitDo Mod Kit](https://shop.8bitdo.com/products/8bitdo-mod-kit-for-original-dogbone-controller) and it worked. 
 
+Also, you can run boot ROMs from both consoles. You have to put them ( gb_bios.bin and gbc_bios.bin ) in the folder /etc/libretro/system.
+
 There's no save state mechanism here. However, the sram saves work. 
 
 
