@@ -1,3 +1,11 @@
+Chocolate Doom installation : 
+
+
+
+#################################################################################################################################################################################################
+
+gnuboy installation : 
+
 In order to use the emulator [gnuboy](https://github.com/Eternln00b/gnuboy), you need to install the module [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](SDL2_rev).
 
 To install the modules, you have to place them inside a subdirectory of Hakchi2 called "user_mods". 
