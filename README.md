@@ -1,12 +1,15 @@
 Chocolate Doom installation : 
 
+Chocolate Doom is a Doom source port that is minimalist and historically accurate. This version (3.1.0) has been ported for Nintendo Classic platforms.
+In order to run my port you need the modules [libmoduplug](libs/libmoduplug), [libsamplerate](libs/libsamplerate) and [SDL2_mixer](libs/SDL2_mixer).
 
+The modules [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](libs/SDL2_rev) are also mandatory for this modules. 
 
-#################################################################################################################################################################################################
+##############################################################################
 
 gnuboy installation : 
 
-In order to use the emulator [gnuboy](https://github.com/Eternln00b/gnuboy), you need to install the module [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](SDL2_rev).
+In order to use the emulator [gnuboy](https://github.com/Eternln00b/gnuboy), you need to install the module [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](libs/SDL2_rev).
 
 To install the modules, you have to place them inside a subdirectory of Hakchi2 called "user_mods". 
 Most of the time, the root directory of Hakchi2 is located inside "Documents" directory.
