@@ -8,8 +8,8 @@ The modules [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev]
 The gamepad isn't entirely supported. I had to write a [snippet code](chocolate_doom/src) in order to make it playable with snes controller. 
 It should be possible to map your gamepad with my source code. 
 
-The tool "chocolate-doom-setup" is usable but as it's not possible to use a keyboard and a mouse ( according to me ). 
-I left in just in case you have a work around. 
+The tool "chocolate-doom-setup" is usable but as it's not possible to use a keyboard and a mouse ( according to me ) you can't map your gamepad with it. 
+I left it in just in case you have a work around. 
 
 ##############################################################################
 
