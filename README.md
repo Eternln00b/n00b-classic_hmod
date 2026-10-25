@@ -1,7 +1,7 @@
 Chocolate Doom installation : 
 
 Chocolate Doom is a Doom source port that is minimalist and historically accurate. This version (3.1.0) has been ported for Nintendo Classic platforms.
-In order to run my port you need the modules [libmoduplug](), [libsamplerate](libs/libsamplerate) and [SDL2_mixer](libs/SDL2_mixer).
+In order to run my port you need the modules [libmoduplug](libs/libmoduplug), [libsamplerate](libs/libsamplerate) and [SDL2_mixer](libs/SDL2_mixer).
 The modules [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](libs/SDL2_rev) are also mandatory for this modules. 
 
 ##############################################################################
