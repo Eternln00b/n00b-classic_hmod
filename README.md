@@ -9,6 +9,7 @@ The gamepad isn't entirely supported. I had to write a [snippet code](chocolate_
 It should be possible to map your gamepad with my source code. 
 
 The tool "chocolate-doom-setup" is usable but as it's not possible to use a keyboard and a mouse ( according to me ) you can't map your gamepad with it. 
+
 I left it in just in case you have a work around. 
 
 ##############################################################################
