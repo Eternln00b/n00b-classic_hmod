@@ -1,9 +1,17 @@
 Chocolate Doom installation : 
 
 Chocolate Doom is a Doom source port that is minimalist and historically accurate. This version (3.1.0) has been ported for Nintendo Classic platforms.
+
 In order to run my port you need the modules [libmoduplug](libs/libmoduplug), [libsamplerate](libs/libsamplerate) and [SDL2_mixer](libs/SDL2_mixer).
 
 The modules [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](libs/SDL2_rev) are also mandatory for this modules. 
+
+The gamepad isn't entirely supported. I had to write a [snippet code](chocolate_doom/src) in order to make it playable with snes controller. 
+It should be possible to map your gamepad with my source code. 
+
+The tool "chocolate-doom-setup" is usable but as it's not possible to use a keyboard and a mouse ( according to me ) you can't map your gamepad with it. 
+
+I left it in just in case you have a work around. 
 
 ##############################################################################
 
