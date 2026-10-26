@@ -15,7 +15,7 @@ Freedoom looks supported
 ![Screenshot](./.pictures/freedoom.jpg)
 
 The gamepad isn't entirely supported. I had to write a [snippet code](chocolate_doom/src) in order to make it playable with snes controller. 
-It should be possible to map your gamepad with my source code. 
+It should be possible to map your gamepad with my source code. This another [snippet code](chocolate_doom/src/get_codes.c) should be useful.
 
 The tool "chocolate-doom-setup" is usable but as it's not possible to use a keyboard and a mouse ( according to me ) you can't map your gamepad with it. 
 
