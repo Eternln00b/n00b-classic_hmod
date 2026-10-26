@@ -10,12 +10,20 @@ In order to run my port you need the modules [libmoduplug](libs/libmoduplug), [l
 
 The modules [Eternln00b-watchdog](Eternln00b-watchdog) and the module [SDL2_rev](libs/SDL2_rev) are also mandatory for this modules. 
 
+Freedoom looks supported
+
+![Screenshot](./.pictures/freedoom.jpg)
+
 The gamepad isn't entirely supported. I had to write a [snippet code](chocolate_doom/src) in order to make it playable with snes controller. 
 It should be possible to map your gamepad with my source code. 
 
 The tool "chocolate-doom-setup" is usable but as it's not possible to use a keyboard and a mouse ( according to me ) you can't map your gamepad with it. 
 
 I left it in just in case you have a work around. 
+
+In order to run it, you just have to use the wrapper script /usr/games/chocolatedoom-cmd without argument.
+
+![Screenshot](./.pictures/chocolate_dm1.jpg)
 
 ##############################################################################
 
