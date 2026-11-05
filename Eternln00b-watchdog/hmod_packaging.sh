@@ -19,15 +19,14 @@ mkdir ${workdir}
 cp ${pkg_chck} ${workdir}
 
 /bin/cat /dev/null > ${workdir}/install
-/bin/cat <<install >> ${workdir}/install
+/bin/cat <<inst >> ${workdir}/install
 #!/bin/sh
 
-copy ./$Eternln00b_watchdog \$rootfs/usr/bin/$Eternln00b_watchdog
-chmod 0755 \$rootfs/usr/bin/$Eternln00b_watchdog
+install -m 0755 ./$Eternln00b_watchdog \$rootfs/usr/bin/$Eternln00b_watchdog
 echo "overmount \$rootfs/usr/bin/$Eternln00b_watchdog" > \$preinitpath/p8000_$Eternln00b_watchdog
 
 return 1
-install
+inst
 
 /bin/cat /dev/null > ${workdir}/uninstall
 /bin/cat <<undo >> ${workdir}/uninstall
