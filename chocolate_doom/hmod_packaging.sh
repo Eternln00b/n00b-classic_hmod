@@ -163,16 +163,18 @@ kill \$DOOM_PID 2>/dev/null
 wrp2
 
 /bin/cat /dev/null > ${workdir}/install
-/bin/cat <<install >> ${workdir}/install
+/bin/cat <<inst >> ${workdir}/install
 #!/bin/sh
+
+install -m 0755 ./$vkeyboard \$rootfs/usr/bin/$vkeyboard
+echo "overmount \$rootfs/usr/bin/$vkeyboard" > \$preinitpath/p9000_$vkeyboard
 
 set -- "$doom_bin" "$doom_s_bin" "$driver_bin"
 
 for b in "\$@"
 do
 
-    copy ./\$b \$rootfs/usr/bin/\$b
-    chmod 0755 \$rootfs/usr/bin/\$b
+    install -m 0755 ./\$b \$rootfs/usr/bin/\$b
     echo "overmount \$rootfs/usr/bin/\$b" > \$preinitpath/p9000_\$b
 
 done
@@ -182,14 +184,13 @@ set -- "$wrapper_1st_script" "$wrapper_2nd_script"
 for script in "\$@"
 do 
 
-    copy ./\$script \$rootfs/usr/games/\$script
-    chmod 0755 \$rootfs/usr/games/\$script
+    install -m 0755 ./\$script \$rootfs/usr/games/\$script
     echo "overmount \$rootfs/usr/games/\$script" > \$preinitpath/p9000_\$script
 
 done
 
 return 1
-install
+inst
 
 /bin/cat /dev/null > ${workdir}/uninstall
 /bin/cat <<undo >> ${workdir}/uninstall

@@ -165,11 +165,10 @@ kill \$GNUBOY_PID 2>/dev/null
 wrp2
 
 /bin/cat /dev/null > ${workdir}/install
-/bin/cat <<install >> ${workdir}/install
+/bin/cat <<inst >> ${workdir}/install
 #!/bin/sh
 
-copy ./$gnuboy_bin \$rootfs/usr/bin/$gnuboy_bin
-chmod 0755 \$rootfs/usr/bin/$gnuboy_bin
+install -m 0755 ./$gnuboy_bin \$rootfs/usr/bin/$gnuboy_bin
 echo "overmount \$rootfs/usr/bin/$gnuboy_bin" > \$preinitpath/p9000_$gnuboy_bin
 
 set -- "$wrapper_1st_script" "$wrapper_2nd_script"
@@ -177,14 +176,13 @@ set -- "$wrapper_1st_script" "$wrapper_2nd_script"
 for script in "\$@"
 do 
 
-    copy ./\$script \$rootfs/usr/games/\$script
-    chmod 0755 \$rootfs/usr/games/\$script
+    install -m 0755 ./\$script \$rootfs/usr/games/\$script
     echo "overmount \$rootfs/usr/games/\$script" > \$preinitpath/p9000_\$script
 
 done
 
 return 1
-install
+inst
 
 /bin/cat /dev/null > ${workdir}/uninstall
 /bin/cat <<undo >> ${workdir}/uninstall
