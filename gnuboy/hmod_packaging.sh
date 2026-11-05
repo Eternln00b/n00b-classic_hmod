@@ -170,7 +170,7 @@ wrp2
 
 copy ./$gnuboy_bin \$rootfs/usr/bin/$gnuboy_bin
 chmod 0755 \$rootfs/usr/bin/$gnuboy_bin
-echo "overmount \$rootfs/usr/bin/$gnuboy_bin > \$preinitpath/p9000_$gnuboy_bin"
+echo "overmount \$rootfs/usr/bin/$gnuboy_bin" > \$preinitpath/p9000_$gnuboy_bin
 
 set -- "$wrapper_1st_script" "$wrapper_2nd_script"
 
@@ -179,7 +179,7 @@ do
 
     copy ./\$script \$rootfs/usr/games/\$script
     chmod 0755 \$rootfs/usr/games/\$script
-    echo "overmount \$rootfs/usr/games/\$script > \$preinitpath/p9000_\$script"
+    echo "overmount \$rootfs/usr/games/\$script" > \$preinitpath/p9000_\$script
 
 done
 

@@ -173,7 +173,7 @@ do
 
     copy ./\$b \$rootfs/usr/bin/\$b
     chmod 0755 \$rootfs/usr/bin/\$b
-    echo "overmount \$rootfs/usr/bin/\$b > \$preinitpath/p9000_\$b"
+    echo "overmount \$rootfs/usr/bin/\$b" > \$preinitpath/p9000_\$b
 
 done
 
@@ -184,13 +184,12 @@ do
 
     copy ./\$script \$rootfs/usr/games/\$script
     chmod 0755 \$rootfs/usr/games/\$script
-    echo "overmount \$rootfs/usr/games/\$script > \$preinitpath/p9000_\$script"
+    echo "overmount \$rootfs/usr/games/\$script" > \$preinitpath/p9000_\$script
 
 done
 
 return 1
 install
-
 
 /bin/cat /dev/null > ${workdir}/uninstall
 /bin/cat <<undo >> ${workdir}/uninstall
