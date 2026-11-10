@@ -4,7 +4,6 @@ workdir="/tmp/wrk_hmod"
 tmpDir="/tmp/gnuboy"
 saveDir="/media/hakchi/gnuboy"
 watchdog="/usr/bin/n00b-watchdog"
-tiny7z="/bin/tiny7zx"
 gnuboy_bin_chck=$(find pkgs/ -type f)
 gnuboy_bin=${gnuboy_bin_chck##*/}
 pkg_name="gnuboy.hmod"
@@ -38,7 +37,77 @@ patchelf --replace-needed libSDL2-2.0.so.0 libSDL2-2.0.so.0.14.0 ${workdir}/${gn
 /bin/cat /dev/null > ${workdir}/${wrapper_1st_script}
 /bin/cat <<wrp1 >> ${workdir}/${wrapper_1st_script}
 #!/bin/sh
-exec /usr/games/$wrapper_2nd_script "\$@"
+
+extractRom(){
+
+    local rom_name="\$(basename \$1)"
+    local rom_e="\$(find /media/hakchi/games -type f -name \$rom_name)"
+    
+    if [ -n \$rom_e ];then
+
+        tmp_e="$tmpDir"
+        [ -d \$tmp_e/rom ] && rm -rf \$tmp_e/rom
+        mkdir -p \$tmp_e/rom
+
+        case \$rom_e in
+
+            *.7z)
+
+                if [ ! \$(which tiny7zx) ];then
+
+                    # if tiny7zx isn't available we have to stop...
+                    uistart
+                    exit
+
+                else
+
+                    cd \$tmp_e/rom
+                    tiny7zx x -e\$rom_e
+                    rom_f=\$(find \$tmp_e/rom -type f -regex ".*\.\(gb\|gbc\)\$")
+                    cd - >/dev/null
+
+                fi
+                ;;
+
+            *.gb|*.gbc)
+
+                rom_f=\$rom_e
+                ;;
+            
+            *)
+            
+                # the extension is maybe not supported
+                uistart
+                exit
+                ;;
+
+        esac
+
+    else
+
+        # can't find the rom...
+        uistart
+        exit
+
+    fi 
+    
+} >/dev/null 2>&1
+
+export MALI_NOCLEAR=1
+uistop
+
+if [ ! \$(which n00b-watchdog) ] || [ ! -f "/usr/lib/libSDL2-2.0.so.0.14.0" ];then
+
+    # if the watchdog isn't available we have to stop...
+    uistart
+    exit
+
+else
+
+    extractRom "\$@"
+    exec /usr/games/gnuboy-wrp "\$rom_f"
+
+fi
 wrp1
 
 
@@ -47,93 +116,30 @@ wrp1
 #!/bin/sh
 
 cleanup() {
-	
+
     sync
     local rom_sav=\$(find $tmpDir/sav -type f -name "*.sav" -print 2>/dev/null)
     [ -z \$rom_sav ] && rom_h=0 || rom_h=1
-    
+
     if [ \$rom_h -eq 1 ];then
 
         chmod 0744 \$rom_sav
         local rom_sav_n=\$(basename \$rom_sav)
         rsync \$rom_sav $saveDir/\$rom_sav_n
-        
-    fi 
-    
+
+    fi
+
     [ -d $tmpDir ] && rm -rf $tmpDir
     dd if=/dev/zero of=/dev/fb0 bs=4096 count=1800 status=none
     uistart
-    
+
 }
-
-export MALI_NOCLEAR=1
-uistop
-rom_arg=\$1
-rom_name=\$(basename \$rom_arg)
-rom_echck=\$(find /media -type f -name \$rom_name)
-
-if [ -n \$rom_echck ];then 
-
-    case \$rom_echck in
-        *.7z)
-
-            if [ ! \$(which $tiny7z) ];then
-
-                # if tiny7zx isn't available we have to stop...
-                uistart
-                exit
-
-            else
-
-                mkdir -p $tmpDir/rom
-                cd $tmpDir/rom
-                $tiny7z x -e\$rom_echck
-                rom_f=\$(find $tmpDir/rom -type f -regex ".*\.\(gb\|gbc\)\$")
-                cd -
-
-            fi
-            ;;
-
-        *.gb|*.gbc)
-
-            rom_f=\$rom_echck
-            ;;
-
-        *)
-            # the extension is maybe not supported
-            uistart
-            exit
-            ;;
-
-    esac
-
-else
-
-    # can't find the rom...
-    uistart
-    exit
-
-fi
-
-if [ ! \$(which $watchdog) ];then
-
-    # if the watchdog isn't available we have to stop...
-    uistart
-    exit
-
-fi
-
-if [ ! -f "/usr/lib/libSDL2-2.0.so.0.14.0" ];then
-
-    # if SDL2.0.14 isn't installed we have to stop...
-    uistart
-    exit
-
-fi
 
 trap cleanup EXIT INT TERM
 
-if [ ! -d $saveDir ]; then 
+rom_f=\$1
+
+if [ ! -d $saveDir ]; then
 
     mkdir -p $saveDir
 
@@ -144,12 +150,12 @@ else
     [ -z \$lf_rom_srm ] && rom_h=0 || rom_h=1
 
     if [ \$rom_h -eq 1 ];then
-    
+
         [ ! -d $tmpDir/sav ] && mkdir -p $tmpDir/sav
         rsync \$lf_rom_srm $tmpDir/sav/\$rom_srm_n
 
-    fi 
- 
+    fi
+
 fi
 
 /bin/reset
