@@ -117,11 +117,13 @@ wrp1
 
 cleanup() {
 
+    local rom_s=\$(basename \${rom_f%%.*})
     sync
-    find $tmpDir/sav -type f \( -name "*.sav" -o -name "*.00[0-9]" \) 2>/dev/null | while IFS= read -r sav; do
+    find $tmpDir/sav -type f \( -name "\$rom_s.sav" -o -name "\$rom_s.00[0-9]" \) 2>/dev/null | while IFS= read -r sav; do
     
+        local rom_sn=\$(basename \$sav)
         chmod 0744 \$sav
-        rsync "\$sav" "$saveDir/$(basename "\$sav")"
+        rsync "\$sav" "$saveDir/\$rom_sn"
     
     done
 
@@ -130,7 +132,6 @@ cleanup() {
     uistart
 
 }
-
 
 trap cleanup EXIT INT TERM
 
