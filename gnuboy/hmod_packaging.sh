@@ -118,18 +118,14 @@ wrp1
 cleanup() {
 
     sync
-    local rom_sav=\$(find $tmpDir/sav -type f -name "*.sav" -print 2>/dev/null)
-    [ -z \$rom_sav ] && rom_h=0 || rom_h=1
+    find $tmpDir/sav -type f \( -name "*.sav" -o -name "*.00[0-9]" \) 2>/dev/null | while IFS= read -r sav; do
+    
+        chmod 0744 "\$sav"
+        rsync "\$sav" "/media/hakchi/gnuboy/\$(basename "\$sav")"
+    
+    done
 
-    if [ \$rom_h -eq 1 ];then
-
-        chmod 0744 \$rom_sav
-        local rom_sav_n=\$(basename \$rom_sav)
-        rsync \$rom_sav $saveDir/\$rom_sav_n
-
-    fi
-
-    [ -d $tmpDir ] && rm -rf $tmpDir
+    [ -d /tmp/gnuboy ] && rm -rf /tmp/gnuboy
     dd if=/dev/zero of=/dev/fb0 bs=4096 count=1800 status=none
     uistart
 
@@ -145,16 +141,13 @@ if [ ! -d $saveDir ]; then
 
 else
 
-    rom_srm_n=\$(basename \$rom_f | awk -F. '{print \$1 ".sav"}')
-    lf_rom_srm=\$(find $saveDir -type f -name \$rom_srm_n -print 2>/dev/null)
-    [ -z \$lf_rom_srm ] && rom_h=0 || rom_h=1
+    rom_n=\$(basename \${rom_f%%.*})
+    [ ! -d $tmpDir/sav ] && mkdir -p $tmpDir/sav
+    find /media/hakchi/gnuboy -type f \( -name "\$rom_n.sav" -o -name "\$rom_n.00[0-9]" \) 2>/dev/null | while IFS= read -r sav; do
 
-    if [ \$rom_h -eq 1 ];then
-
-        [ ! -d $tmpDir/sav ] && mkdir -p $tmpDir/sav
-        rsync \$lf_rom_srm $tmpDir/sav/\$rom_srm_n
-
-    fi
+        rsync "\$sav" "$tmpDir/sav/\$(basename "\$sav")"
+    
+    done
 
 fi
 
